@@ -210,12 +210,11 @@ void checkBorder(){
     2. limites arriba
     3. limites abajo */
   else if((ballX-ballSize/2>padJ1XL)&&(ballX+ballSize/2<padJ2XL)){
-            //( (( (ballX-ballSize/2<=padJ1XL) && (ballY+ballSize/2>=padJ1Y1L) ) && ( (ballX-ballSize/2<=padJ1XL) && (ballY-ballSize/2<=padJ1Y2L) )) ||
-           //(( (ballX+ballSize/2>=padJ2XL) && (ballY+ballSize/2>=padJ2Y1L) ) && ( (ballX+ballSize/2>=padJ2XL) && (ballY-ballSize/2<=padJ2Y2L) ))  ) {
-           if(((ballX-ballSize/2)<=padJ1XL && (ballY+ballSize/2)>=padJ1Y1L && (ballY-ballSize/2)<=padJ1Y2L) ||
-            ((ballX+ballSize/2)>=padJ2XL && (ballY+ballSize/2)>=padJ2Y1L && (ballY-ballSize/2)<=padJ2Y2L) ){
-    right=!right;
-    speed=speed+0.1;}
+    if(((ballX-ballSize/2)<=padJ1XL && (ballY+ballSize/2)>=padJ1Y1L && (ballY-ballSize/2)<=padJ1Y2L) ||
+      ((ballX+ballSize/2)>=padJ2XL && (ballY+ballSize/2)>=padJ2Y1L && (ballY-ballSize/2)<=padJ2Y2L) ){
+      right=!right;
+      speed=speed+0.1;
+    }
   //Pierde J1 (punto J2)
   }else if((ballX-ballSize/2)<=leftL){
     point=true;
