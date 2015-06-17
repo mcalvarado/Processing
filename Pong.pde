@@ -27,7 +27,7 @@ boolean win, restart, onGame, pause;
 
 void setup(){
   //Tamaño, bordes, bordes lisos, rectMode y color blanco para todo
-  size(600,500);
+  size(900,800);
   stroke(255);
   smooth();
   rectMode(CENTER);
@@ -46,12 +46,6 @@ void setup(){
   //Configuración Arduino y sus pines
   arduino = new Arduino(this, Serial.list()[0], 57600);
   
-  //Límites del tablero
-  rightL = width-(padW/2);
-  leftL = padW/2;
-  upL = padW/2;
-  downL = height-(padW/2);
-  
   initialize(); //Inicia valores que pueden cambiar (separado por si ocurre un restart)
   
   //Límites de los pads (x, arriba y abajo de cada uno)
@@ -61,6 +55,12 @@ void setup(){
   padJ1Y2L = padJ1Y+(padH/2);  //J1 abajo
   padJ2Y1L = padJ2Y-(padH/2);  //J2 arriba
   padJ2Y2L = padJ2Y+(padH/2);  //J2 abajo
+  
+  //Límites del tablero
+  rightL = padJ2XL+(ballSize/4);
+  leftL = padJ1XL-(ballSize/4);
+  upL = padW/2;
+  downL = height-(padW/2);
 }
 
 void draw(){
@@ -209,12 +209,10 @@ void checkBorder(){
     1. limites horizontales
     2. limites arriba
     3. limites abajo */
-  else if((ballX-ballSize/2>padJ1XL)&&(ballX+ballSize/2<padJ2XL)){
-    if(((ballX-ballSize/2)<=padJ1XL && (ballY+ballSize/2)>=padJ1Y1L && (ballY-ballSize/2)<=padJ1Y2L) ||
-      ((ballX+ballSize/2)>=padJ2XL && (ballY+ballSize/2)>=padJ2Y1L && (ballY-ballSize/2)<=padJ2Y2L) ){
-      right=!right;
-      speed=speed+0.1;
-    }
+  else if(((ballX-ballSize/2)<=padJ1XL && (ballY+ballSize/2)>=padJ1Y1L && (ballY-ballSize/2)<=padJ1Y2L) ||
+          ((ballX+ballSize/2)>=padJ2XL && (ballY+ballSize/2)>=padJ2Y1L && (ballY-ballSize/2)<=padJ2Y2L)){
+    right=!right;
+    speed=speed+0.1;
   //Pierde J1 (punto J2)
   }else if((ballX-ballSize/2)<=leftL){
     point=true;
